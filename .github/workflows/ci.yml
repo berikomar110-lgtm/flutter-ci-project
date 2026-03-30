@@ -1,15 +1,25 @@
-name: CI Test
+name: Flutter CI
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Echo test
-        run: echo "CI жұмыс істеп тұр"
+      # Flutter орнату
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.10.0'
+
+      # Пакеттерді жүктеу
+      - name: Install dependencies
+        run: flutter pub get
+
+      # APK build
+      - name: Build APK
+        run: flutter build apk --release
