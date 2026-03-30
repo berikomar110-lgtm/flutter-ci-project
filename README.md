@@ -1,2 +1,2 @@
 Test CI
-
+run test
